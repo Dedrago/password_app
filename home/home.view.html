@@ -38,49 +38,39 @@ input {
 }
 </style>
 <script>
+function removeCookie() {
+  var input = document.getElementById("password");
 
-    function removeCookie() {
-
-
-var input = document.getElementById("password");
-     
- 
-    function getItemHrefById(json, itemId){ 
-        for (var i in json) {
-            if (json[i].id == itemId) {
-                return json[i].password;
-            }
-        }
+  function getUserById(json, itemId){ 
+    for (var i in json) {
+      if (json[i].id == itemId) {
+        return json[i].password;
+      }
     }
-    
-    function setItemHrefById(json, itemId, val) {
-        for (var i in json) {
-            if (json[i].id == itemId) {
-                json[i].password = val;
-                break;
-            }
-        }
-        return json;
-    };   
-        
-    
-    var json = JSON.parse(localStorage["users"]);
-    var href = getItemHrefById(json, "1");
-    
-    
-    
-        json = setItemHrefById(json, '1', input.value);
-        var href = getItemHrefById(json, "1");
-        // update storage:
-        console.log(json);
-        localStorage["users"] = JSON.stringify(json);
-    
+  }
 
+  function setUserById(json, itemId, val) {
+    for (var i in json) {
+      if (json[i].id == itemId) {
+        json[i].password = val;
+        break;
+      }
+    }
+    return json;
+  };   
+  
+  json = setUserById(json, '1', input.value);
+        
+  // update storage:
+  console.log(json);
+  localStorage["users"] = JSON.stringify(json);
 }
+
 function mouseoverPass(obj) {
   var obj = document.getElementById('password');
   obj.type = "text";
 }
+
 function mouseoutPass(obj) {
   var obj = document.getElementById('password');
   obj.type = "password";
@@ -94,11 +84,7 @@ function myFunction() {
         x.type = "password";
     }
 }
-
-
-
-
-      </script>
+</script>
 <div ng-repeat="user in vm.allUsers">
 <h1>Hi {{user.firstName}}!</h1>
 <p>You're logged in!!</p>
